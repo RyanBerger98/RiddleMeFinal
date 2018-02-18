@@ -1,0 +1,31 @@
+{
+	"title": "Explore The Hodson Building Floor 2",
+	"creatorUsername": "umdHacks69",
+	"creatorID": "1234567",
+	"riddleId": "qGjUaBuw",
+	"length": "10 minutes",
+	"points": "15",
+    "question": "qGjUaBuw",
+    "longitude": "-76.62210",
+    "latitude": "39.32768",
+    "Altitude": "109.52",
+    "answer": "",
+    "geofence": [
+    	{
+    		"lat": "39.327858",
+    		"lon": "-76.622650"
+    	},
+    	{
+    		"lat": "39.327895",
+    		"lon": "-76.622130"
+    	},
+    	{
+    		"lat": "39.327239",
+    		"lon": "-76.622081"
+    	},
+    	{
+    		"lat": "39.327243",
+    		"lon": "-76.622588"
+    	}
+    ]
+}
