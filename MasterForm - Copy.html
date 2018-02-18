@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Places Searchbox</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #E7DDDB;
+      }
+      #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+
+      #infowindow-content {
+        display: none;
+      }
+
+      h1{
+         display: block;
+    text-align: center;
+    font-size: 1.5em;
+      }
+      label{
+    display: block;
+    text-align: center;
+   
+    font-size: .5em;
+
+      }
+      input {
+        width: 33%;
+        -webkit-border-radius: 50px;
+        
+        
+        padding: 10px ;
+         
+        text-align: center;
+          display: block;
+        margin-right: auto;
+       margin-left: auto;
+       
+
+      }
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+      #target {
+        width: 345px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><font size = "10">Create a New Riddle</h1>
+    <div id = "mainForm"> 
+      <fieldset>
+        <legend><font size = "5">Riddle Information</legend>
+        <p>
+          <label><font size = "5"> Riddle Name</label>
+          <br /> 
+           <input type = "text"
+                 id = "title6"
+
+                 /> 
+        </p>
+        <p>
+          <label><font size = "5">Estimated Completion Time (minutes) </label>
+          <br />
+          <input type = "text"
+                 id = "timeToCompelte"
+                 /> 
+        </p>
+        <p>
+          <h1>Click the map below to create the area your riddle is contained in.</h1>
+     <!--    <button onclick="myFunction()">Create first step</button> -->
+      <input  onclick="myFunction()" type="image" id="myimage"  style="height:86.4px;width:190.4px;" src="newStepButton.png" />
+      <input onclick="prepareToSend()" type="image" id="myimage" style="height:86.4px;width:190.4px;" src="newSubmitButton.png" />
+
+       
+        </p>
+        <div id = "stepsContainer"> 
+        </div><script type="text/javascript">   
+         var lat2;
+         var long2;
+         function setLatLong(lat, long){
+          lat2 = lat;
+          long2 = long;
+      var textBox = document.getElementById("TB");
+      var textBox1 = document.getElementById("TB1");
+      if(textBox != null){
+        textBox.setAttribute("placeHolder", lat);
+        textBox1.setAttribute("placeHolder", long);
+        console.log(lat, long);
+
+      }
+    }
+
+        </script>
+        <script>
+         
+      function prepareToSend(){
+        var title = document.getElementById("title6").value;
+        var time = document.getElementById("timeToCompelte").value;
+        var question = document.getElementById("TB3").value;
+        var answer = document.getElementById("TB2").value;
+        var coords = "";
+        for( i = 0; i < polygonCoords.length; i++){
+          coords = coords + polygonCoords[i].lat + ":" + polygonCoords[i].lng + ",";
+        }
+        var link = "https://x45bz1gn.apps.lair.io/create/" + title + "/" + time + "/" + question + "/" + long2 + "/" + lat2 + "/" + answer + "/" + coords;
+
+
+        window.location.replace(link);
+      }
+
+   
+          function myFunction() {
+           console.log("Fuck");
+        var myLabel = document.createElement("label");
+        myLabel.setAttribute("font-size", "2");
+         var textBox = document.createElement("input");
+         myLabel.innerHTML = "The longitiude of your riddle:";
+         textBox.innerHTML = "TB0";
+         textBox.setAttribute("id", "TB");
+         var myLabel1 = document.createElement("label");
+         var textBox1 = document.createElement("input");
+          myLabel1.innerHTML = "The latitude of your riddle:";
+         textBox1.setAttribute("id", "TB1");
+         var myLabel3 = document.createElement("label");
+         var textBox3 = document.createElement("input");
+         myLabel3.innerHTML = "The description of your riddle:";
+         textBox3.innerHTML = "TB0";
+         textBox3.setAttribute("id", "TB3");
+         var myLabel2 = document.createElement("label");
+         var textBox2 = document.createElement("input");
+         myLabel2.innerHTML = "The answer to your riddle";
+        textBox2.innerHTML = "TB2";
+        textBox2.setAttribute("id","TB2");
+        var formElement = document.getElementById("mainForm");
+        if(formElement == null) {
+          alert("Error on the page. Please refresh.");
+        } else {
+          formElement.appendChild(myLabel);
+          formElement.appendChild(textBox);
+
+          var myBreak = document.createElement('br');
+          formElement.appendChild(myBreak);
+          formElement.appendChild(myLabel1);
+          formElement.appendChild(textBox1);
+          var myBreak2 = document.createElement('br');
+          formElement.appendChild(myBreak2);
+          formElement.appendChild(myLabel3);
+          formElement.appendChild(textBox3);
+          var myBreak4 = document.createElement('br');
+          formElement.appendChild(myBreak4);
+          
+          formElement.appendChild(myLabel2);
+          formElement.appendChild(textBox2);
+          var myBreak3 = document.createElement('br');
+          formElement.appendChild(myBreak3);
+        }
+            //height="200" width="300"
+          // console.log("clicked");
+           //var frameElement = document.getElementById('mapFrame');
+          //frameElement = frameElement.setAttribute("style", "height:200, width:500");
+          // <iframe src = "TestMapWithSearch.html" id = "mapFrame" ></iframe>
+
+          //height="200" width="300"
+          }
+    /*     function addNewStep(){
+      var button = document.createElement("button");
+      button.innerHTML = "Do Something";
+      var body69 = document.getElementById("stepsContainer");
+      body69.appendChild(button);
+      console.log("button Clicked");*/
+   //}
+
+        </script>
+      </fieldset>
+    </div>
+   <!--  <iframe src = "TestMapWithSearch.html"  width="1300" height="650" id = "mapFrame" ></iframe> -->
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+    <script>
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      var infoWindow;
+      var clickCount = 0;
+      var triangleCoords;
+      var map;
+      var oldLat;
+      var oldLong;
+      var polygonCoords;
+      var triangleCoords;
+      function initAutocomplete() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 39.327858, lng: -76.622650},
+          zoom: 13,
+          mapTypeId: 'roadmap'
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+           // Add a listener for the click event.
+      
+        });
+        google.maps.event.addDomListener(map, 'click', showAlert);
+
+      }
+      function showAlert(event) {
+        var lati =  event.latLng.lat();
+        var long =  event.latLng.lng();
+        if(clickCount == 0) {
+
+           oldLat = lati;
+           oldLong = long;
+           var triangleCoords = [
+            {lat: lati, lng: long},
+            {lat: lati, lng: long}
+        ];
+         userInput = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+
+
+        userInput.setMap(map);
+
+        
+    } else if (clickCount == 1) {
+      userInput.setMap(null);
+      polygonCoords = [
+        {lat: oldLat, lng: oldLong},
+        {lat: lati, lng: long}
+      ];
+      userInput = new google.maps.Polygon({
+          paths: polygonCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        userInput.setMap(map);
+    }else if (clickCount > 1) {
+        userInput.setMap(null);
+          polygonCoords.push({lat: lati, lng: long});
+
+      userInput = new google.maps.Polygon({
+          paths: polygonCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        userInput.setMap(map);
+        if(clickCount == 2){
+     // addNewStep();        
+    }
+}
+
+        userInput.addListener('click', showArrays );
+      //  userInput.addListener('click', inside);
+     
+
+        infoWindow = new google.maps.InfoWindow;
+
+         clickCount = clickCount+1;
+}
+   
+    function showArrays(event){
+        console.log("showArrays")
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>GeoFence</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+         setLatLong(event.latLng.lat(), event.latLng.lng());  
+
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+
+        userInput.setMap(map);
+    }  
+     
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key==places&callback=initAutocomplete"
+         async defer></script>
+  
+  </body>
+</html>
